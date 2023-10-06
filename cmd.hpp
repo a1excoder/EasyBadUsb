@@ -150,10 +150,6 @@ static const int BTN_N = sizeof(btn_value_arr) / sizeof(*btn_value_arr);
     } \
   }
 
-#define ENTER \
-  PRESS(KEY_RETURN); \
-  RELEASE(KEY_RETURN);
-
 #define PRINT(str) \
   Keyboard.print(str);
 
