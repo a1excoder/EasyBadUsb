@@ -169,7 +169,7 @@ static const int BTN_N = sizeof(btn_value_arr) / sizeof(*btn_value_arr);
 #define OPEN_CMD \
   Keyboard.press(KEY_LEFT_GUI); \
   Keyboard.press('r'); \
-  DL(200) \
+  D500 \
   Keyboard.releaseAll(); \
   D500 \
   Keyboard.println("cmd");
@@ -178,18 +178,18 @@ static const int BTN_N = sizeof(btn_value_arr) / sizeof(*btn_value_arr);
 #define OPEN_CMD_AS_ADMIN \
   Keyboard.press(KEY_LEFT_GUI); \
   Keyboard.press('r'); \
-  DL(200) \
+  DL(300) \
   Keyboard.releaseAll(); \
-  DL(200) \
+  D500 \
   Keyboard.print("cmd"); \
   D500 \
-  PRESS_N(MKEY_LEFT_CTRL | MKEY_LEFT_SHIFT | MKEY_ENTER) \
+  PRESS(MKEY_LEFT_CTRL | MKEY_LEFT_SHIFT | MKEY_ENTER) \
   DL(200) \
   Keyboard.releaseAll(); \
   D500 \
   Keyboard.press(KEY_LEFT_ARROW); \
-  DL(300) \
+  D500 \
   Keyboard.release(KEY_LEFT_ARROW); \
   Keyboard.press(KEY_RETURN); \
-  DL(300) \
+  D500 \
   Keyboard.release(KEY_RETURN);
