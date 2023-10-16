@@ -150,12 +150,6 @@ static constexpr int BTN_N = sizeof(btn_value_arr) / sizeof(*btn_value_arr);
 #define PRINT_LN(str) \
   Keyboard.println(str);
 
-#define PRESS_DL(BTN, dl) \
-  PRESS(BTN) \
-  DL(dl) \
-  RELEASE(BTN)
-
-
 #define OPEN_CMD() \
   PRESS(MKEY_LEFT_WIN | MKEY_CH_R) \
   DL(300) \
