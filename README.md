@@ -83,7 +83,7 @@ PRINT_LN(str) // enter string with new line
 ```
 
 ### implementation of opening cmd
-```
+```cpp
 OPEN_CMD() // open cmd
 OPEN_CMD_AS_ADMIN() // open cmd as admin user
 ```
