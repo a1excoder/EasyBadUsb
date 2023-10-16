@@ -67,7 +67,6 @@ PRESS(MKEY_LEFT_ARROW)
 
 ### delay functions
 ```cpp
-D500 // delay 500 milliseconds
 DL(milliseconds) // milliseconds in arguments
 ```
 
@@ -81,13 +80,12 @@ RELEASE_ALL() // release all buttons
 ```cpp
 PRINT(str) // enter string
 PRINT_LN(str) // enter string with new line
-PRINT_DL(str, milliseconds) // enter string with auto release after delay 
 ```
 
 ### implementation of opening cmd
 ```
-OPEN_CMD // open cmd
-OPEN_CMD_AS_ADMIN // open cmd as admin user
+OPEN_CMD() // open cmd
+OPEN_CMD_AS_ADMIN() // open cmd as admin user
 ```
 
 
