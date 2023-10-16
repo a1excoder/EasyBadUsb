@@ -123,12 +123,9 @@ static const uint8_t btn_value_arr[] = {
   KEY_F4
 };
 
-static const int BTN_N = sizeof(btn_value_arr) / sizeof(*btn_value_arr);
+static constexpr int BTN_N = sizeof(btn_value_arr) / sizeof(*btn_value_arr);
 
 #define CHECK_MASK(original, n, mask) ((original) & (1 << (n))) == (mask)
-
-#define D500 \
-  delay(500);
 
 #define DL(time) \
   delay(time);
@@ -138,9 +135,6 @@ static const int BTN_N = sizeof(btn_value_arr) / sizeof(*btn_value_arr);
 
 #define RELEASE_ALL() \
   Keyboard.releaseAll();
-
-// #define PRESS(BTN) \
-//   Keyboard.press(BTN);
 
 // (int i = BTN_N-1; i >= 0; i--)
 #define PRESS(BTNS) \
@@ -162,30 +156,26 @@ static const int BTN_N = sizeof(btn_value_arr) / sizeof(*btn_value_arr);
   RELEASE(BTN)
 
 
-#define OPEN_CMD \
-  Keyboard.press(KEY_LEFT_GUI); \
-  Keyboard.press('r'); \
-  D500 \
-  Keyboard.releaseAll(); \
-  D500 \
-  Keyboard.println("cmd");
-
-
-#define OPEN_CMD_AS_ADMIN \
-  Keyboard.press(KEY_LEFT_GUI); \
-  Keyboard.press('r'); \
+#define OPEN_CMD() \
+  PRESS(MKEY_LEFT_WIN | MKEY_CH_R) \
   DL(300) \
-  Keyboard.releaseAll(); \
-  D500 \
-  Keyboard.print("cmd"); \
-  D500 \
+  RELEASE_ALL() \
+  PRINT("cmd")
+
+
+#define OPEN_CMD_AS_ADMIN() \
+  PRESS(MKEY_LEFT_WIN | MKEY_CH_R) \
+  DL(300) \
+  RELEASE_ALL() \
+  PRINT("cmd") \
+  DL(500) \
   PRESS(MKEY_LEFT_CTRL | MKEY_LEFT_SHIFT | MKEY_ENTER) \
-  DL(200) \
-  Keyboard.releaseAll(); \
-  D500 \
-  Keyboard.press(KEY_LEFT_ARROW); \
-  D500 \
-  Keyboard.release(KEY_LEFT_ARROW); \
-  Keyboard.press(KEY_RETURN); \
-  D500 \
-  Keyboard.release(KEY_RETURN);
+  DL(300) \
+  RELEASE_ALL() \
+  DL(500) \
+  PRESS(MKEY_LEFT_ARROW) \
+  DL(500) \
+  RELEASE(MKEY_LEFT_ARROW) \
+  PRESS(MKEY_ENTER) \
+  DL(300) \
+  RELEASE_ALL()
