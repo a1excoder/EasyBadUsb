@@ -154,7 +154,7 @@ static constexpr int BTN_N = sizeof(btn_value_arr) / sizeof(*btn_value_arr);
   PRESS(MKEY_LEFT_WIN | MKEY_CH_R) \
   DL(300) \
   RELEASE_ALL() \
-  PRINT("cmd")
+  PRINT_LN("cmd")
 
 
 #define OPEN_CMD_AS_ADMIN() \
