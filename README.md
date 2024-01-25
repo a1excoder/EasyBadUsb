@@ -1,125 +1,82 @@
 # EasyBadUsb
 simple header only lib written in C++ to make BadUsb scripting easier (Arduino IDE)
 
+# v2 with alt codes (only for Windows)
 
-### first, include cmd.hpp in your sketch file
+### first, include alt.hpp in your sketch file
 ```cpp
-#include "cmd.hpp"
+#include "alt.hpp"
 ```
 
-### then between BEGIN ... END we write our commands
+### then between BEGIN() ... END() we write our commands
 ```cpp
-BEGIN
+BEGIN()
 
 //
 // commands
 //
 
-END
+END()
 ```
 
+### lowercase input on any keyboard layout expense of alt codes (only works on Windows)
 
-### The PRESS function is used to press special keys and simultaneously press several keys on the keyboard
+#### supported characters (eng letters, numbers and basic special characters)
+
 ```cpp
-PRESS(MKEY_LEFT_CTRL | MKEY_LEFT_SHIFT | MKEY_ENTER)
-
-PRESS(MKEY_LEFT_ARROW)
+static const alt_code alt_codes_array[] = {
+    {' ', 32},  {'B', 66},  {'C', 67},  {'D', 68},  {'E', 69},  {'F', 70},
+    {'G', 71},  {'H', 72},  {'I', 73},  {'J', 74},  {'K', 75},  {'L', 76},
+    {'M', 77},  {'N', 78},  {'O', 79},  {'P', 80},  {'Q', 81},  {'R', 82},
+    {'S', 83},  {'T', 84},  {'U', 85},  {'V', 86},  {'W', 87},  {'X', 88},
+    {'Y', 89},  {'Z', 90},  {'a', 97},  {'b', 98},  {'c', 99},  {'d', 100},
+    {'e', 101}, {'f', 102}, {'g', 103}, {'h', 104}, {'i', 105}, {'j', 106},
+    {'k', 107}, {'l', 108}, {'m', 109}, {'n', 110}, {'o', 111}, {'p', 112},
+    {'q', 113}, {'r', 114}, {'s', 115}, {'t', 116}, {'u', 117}, {'v', 118},
+    {'w', 119}, {'x', 120}, {'y', 121}, {'z', 122}, {'0', 48},  {'1', 49},
+    {'2', 50},  {'3', 51},  {'4', 52},  {'5', 53},  {'6', 54},  {'7', 55},
+    {'8', 56},  {'9', 57},  {'!', 33},  {'"', 34},  {'#', 35},  {'$', 36},
+    {'%', 37},  {'&', 38},  {'\'', 39}, {'(', 40},  {')', 41},  {'*', 42},
+    {'+', 43},  {',', 44},  {'-', 45},  {'.', 46},  {'/', 47},  {':', 58},
+    {';', 59},  {'<', 60},  {'=', 61},  {'>', 62},  {'?', 63},  {'@', 64},
+    {'[', 91},  {'\\', 92}, {']', 93},  {'^', 94},  {'_', 95},  {'`', 96},
+    {'{', 123}, {'|', 124}, {'}', 125}, {'~', 126}, {'A', 65}};
 ```
+
+#### alt codes lib functional
+
+```cpp
+    const char *payload_str = "powershell -windowstyle hidden..."; // malicious string
+
+    alt_print(payload_str, 0); // (malicious_string, sleep time for enter next char)
+    /* sleep time for enter next char.. because i had problems on Windows 7
+    that the system was unable to process alt codes, on Win 10/11 work well */
+```
+
+
+
+
 
 #### buttons definitions
 ```cpp
-#define MKEY_LEFT_CTRL     0x00000001
-#define MKEY_LEFT_WIN      0x00000002
-#define MKEY_LEFT_SHIFT    0x00000004
-#define MKEY_LEFT_ALT      0x00000008
-#define MKEY_ENTER         0x00000010
+#define MKEY_LEFT_CTRL (0x0001 << 0x00)
+#define MKEY_LEFT_WIN (0x0001 << 0x01)
+#define MKEY_LEFT_SHIFT (0x0001 << 0x02)
+#define MKEY_LEFT_ALT (0x0001 << 0x03)
+#define MKEY_ENTER (0x0001 << 0x04)
 
-#define MKEY_UP_ARROW      0x00000020
-#define MKEY_DOWN_ARROW    0x00000040
-#define MKEY_LEFT_ARROW    0x00000080
-#define MKEY_RIGHT_ARROW   0x00000100
+#define MKEY_LEFT_ARROW (0x0001 << 0x05)
+#define MKEY_RIGHT_ARROW (0x0001 << 0x06)
 
-#define MKEY_BACKSPACE     0x00000200
-#define MKEY_TAB           0x00000400
+#define MKEY_CH_R (0x0001 << 0x07)
+#define MKEY_CH_A (0x0001 << 0x08)
+#define MKEY_CH_C (0x0001 << 0x09)
 
-#define MKEY_CH_R          0x00000800
-#define MKEY_CH_A          0x00001000
-#define MKEY_CH_C          0x00002000
-
-#define MKEY_ESC           0x00004000
-#define MKEY_CAPS_LOCK     0x00008000
-#define MKEY_PRINT_SCREEN  0x00010000
-#define MKEY_FN            0x00020000
-
-#define MKEY_NUM_0         0x00040000
-#define MKEY_NUM_1         0x00080000
-#define MKEY_NUM_2         0x00100000
-#define MKEY_NUM_3         0x00200000
-#define MKEY_NUM_4         0x00400000
-#define MKEY_NUM_5         0x00800000
-#define MKEY_NUM_6         0x01000000
-#define MKEY_NUM_7         0x02000000
-#define MKEY_NUM_8         0x04000000
-#define MKEY_NUM_9         0x08000000
-
-#define MKEY_FN_4          0x10000000
+#define MKEY_FN_4 (0x0001 << 0x0A)
 ```
 
-### delay functions
+### The PRESS function is used to press special keys and simultaneously press several keys on the keyboard
 ```cpp
-DL(milliseconds) // milliseconds in arguments
-```
-
-### release functions
-```cpp
-RELEASE(BTN) // release button or bit mask
-RELEASE_ALL() // release all buttons
-```
-
-### print functions
-```cpp
-PRINT(str) // enter string
-PRINT_LN(str) // enter string with new line
-```
-
-### implementation of opening cmd
-```cpp
-OPEN_CMD() // open cmd
-OPEN_CMD_AS_ADMIN() // open cmd as admin user
-```
-
-
-
-### example
-```cpp
-#include "cmd.hpp"
-
-BEGIN
-
-  PRESS(MKEY_LEFT_WIN | MKEY_CH_R)
-  DL(300)
-  RELEASE_ALL()
-
-  PRINT("cmd")
-  DL(500)
-
-  PRESS(MKEY_LEFT_CTRL | MKEY_LEFT_SHIFT | MKEY_ENTER)
-  DL(300)
-  RELEASE_ALL()
-
-  DL(500)
-
-  PRESS(MKEY_LEFT_ARROW)
-  
-  DL(500)
-
-  PRESS(MKEY_ENTER)
-
-  DL(500)
-  RELEASE_ALL()
-
-  DL(500)
-  PRINT_LN("echo Hello World as ADMIN!")
-
-END
+PRESS(MKEY_LEFT_CTRL | MKEY_LEFT_SHIFT | MKEY_ENTER, 200) // (buttons to be pressed, sleep time for press next button)
+PRESS_KRELALL(MKEY_LEFT_WIN | MKEY_CH_R, 200, 500) // (buttons to be pressed, sleep time for press next button, sleep time to release the buttons)
 ```
