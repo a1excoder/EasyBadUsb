@@ -145,6 +145,17 @@ static const uint8_t btn_value_arr[] = {KEY_LEFT_CTRL,
 
 static constexpr int BTN_N = sizeof(btn_value_arr) / sizeof(*btn_value_arr);
 
+static bool release_btn(const uint8_t button) {
+    for (int i = 0; i < BTN_N; ++i) {
+        if (btn_arr[i] == button) {
+            KREL(btn_value_arr[i])
+            return true;
+        }
+    }
+
+    return false;
+}
+
 // (int i = BTN_N-1; i >= 0; i--)
 #define PRESS(BTNS, t_sleep)                     \
     for (int i = 0; i < BTN_N; i++) {            \
