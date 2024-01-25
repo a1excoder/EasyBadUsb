@@ -87,14 +87,14 @@ static uint8_t get_full_code(char c) {
     return 0;
 }
 
-static void alt_print(const char *str) {
+static void alt_print(const char *str, size_t t_sleep) {
     const int s_len = static_cast<int>(strlen(str));
     static uint8_t buff[4];
     uint8_t code = 0;
 
     for (int i = 0; i < s_len; ++i) {
         KPRESS(KEY_LEFT_ALT)
-        // delay(100);
+        delay(t_sleep);
 
         if (!(code = get_full_code(str[i]))) goto EXT;
         get_alt_code(buff, code);
@@ -102,7 +102,6 @@ static void alt_print(const char *str) {
         // buff[3] = count numbers in alt code
         for (int j = static_cast<int>(buff[3] - 1); j >= 0; j--) {
             KPRESS(numpad_keys[buff[j]])
-            // delay(100);
             KREL(numpad_keys[buff[j]])
         }
     EXT:
@@ -160,22 +159,21 @@ static constexpr int BTN_N = sizeof(btn_value_arr) / sizeof(*btn_value_arr);
     WAIT(t_wait)                             \
     KRELALL()
 
-#define RUN_ENTER(command)                             \
+#define RUN_ENTER(command, t_sleep_print)              \
     PRESS_KRELALL(MKEY_LEFT_WIN | MKEY_CH_R, 200, 300) \
-    alt_print((command));                              \
+    alt_print((command), (t_sleep_print));             \
     WAIT(200)                                          \
     PRESS_KRELALL(MKEY_ENTER, 0, 300)                  \
     WAIT(500)
 
-#define RUN_ENTER_AS_ADMIN(command)                                      \
+#define RUN_ENTER_AS_ADMIN(command, t_sleep_print)                       \
     PRESS_KRELALL(MKEY_LEFT_WIN | MKEY_CH_R, 200, 300)                   \
-    alt_print((command));                                                \
+    alt_print((command), (t_sleep_print));                               \
     WAIT(200)                                                            \
     PRESS_KRELALL(MKEY_LEFT_CTRL | MKEY_LEFT_SHIFT | MKEY_ENTER, 0, 300) \
     WAIT(500)                                                            \
     PRESS_KRELALL(MKEY_LEFT_ARROW, 0, 300)                               \
     PRESS_KRELALL(MKEY_ENTER, 0, 300)                                    \
     WAIT(500)
-
 
 #endif  // ALT_H
