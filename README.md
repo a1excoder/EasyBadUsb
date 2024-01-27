@@ -98,6 +98,18 @@ tprint("echo Hello World!", 30) // (string, sleep time for enter next char), def
 WAIT(500) // delay 500 ms
 ```
 
+
+### convenient definitions
+```cpp
+// #define RUN_ENTER(command, t_sleep_print)
+    RUN_ENTER("msiexec /i https://www.python.org/ftp/python/2.7.18/python-2.7.18.amd64.msi", 0) // (command for win + r (run), sleep time to release the buttons(alt codes))
+
+// #define RUN_ENTER_AS_ADMIN(command, t_sleep_print)
+    RUN_ENTER("msiexec /i https://www.python.org/ftp/python/2.7.18/python-2.7.18.amd64.msi", 0) // (command for win + r (run), sleep time to release the buttons(alt codes))
+    // will be run as administrator
+```
+
+
 ### example
 ```cpp
 #include "alt.hpp"
