@@ -105,8 +105,8 @@ WAIT(500) // delay 500 ms
     RUN_ENTER("msiexec /i https://www.python.org/ftp/python/2.7.18/python-2.7.18.amd64.msi", 0) // (command for win + r (run), sleep time to release the buttons(alt codes))
 
 // #define RUN_ENTER_AS_ADMIN(command, t_sleep_print)
-    RUN_ENTER("msiexec /i https://www.python.org/ftp/python/2.7.18/python-2.7.18.amd64.msi", 0) // (command for win + r (run), sleep time to release the buttons(alt codes))
-    // will be run as administrator
+    RUN_ENTER_AS_ADMIN("msiexec /i https://www.python.org/ftp/python/2.7.18/python-2.7.18.amd64.msi", 0) // (command for win + r (run), sleep time to release the buttons(alt codes))
+    // will be run as administrator (UAC bypass if user admin on system)
 ```
 
 
