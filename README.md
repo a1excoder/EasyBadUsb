@@ -78,6 +78,8 @@ static const alt_code alt_codes_array[] = {
 #define MKEY_CH_C (0x0001 << 0x09)
 
 #define MKEY_FN_4 (0x0001 << 0x0A)
+
+#define MKEY_CH_Y (0x0001 << 0x0B)
 ```
 
 ### The PRESS functions is used to press special keys and simultaneously press several keys on the keyboard
