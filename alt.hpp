@@ -37,6 +37,8 @@
 
 #define MKEY_FN_4 (0x0001 << 0x0A)
 
+#define MKEY_CH_Y (0x0001 << 0x0B)
+
 typedef struct {
     char symbol;
     uint8_t code;
@@ -126,7 +128,7 @@ static const uint16_t btn_arr[] = {
 
     MKEY_CH_R,       MKEY_CH_A,        MKEY_CH_C,
 
-    MKEY_FN_4};
+    MKEY_FN_4, MKEY_CH_Y};
 
 static const uint8_t btn_value_arr[] = {KEY_LEFT_CTRL,
                                         KEY_LEFT_GUI,
@@ -141,7 +143,7 @@ static const uint8_t btn_value_arr[] = {KEY_LEFT_CTRL,
                                         'a',
                                         'c',
 
-                                        KEY_F4};
+                                        KEY_F4, 'y'};
 
 static constexpr int BTN_N = sizeof(btn_value_arr) / sizeof(*btn_value_arr);
 
@@ -169,7 +171,7 @@ static bool release_btn(const uint8_t button) {
     PRESS((BTNS), t_sleep)                   \
     WAIT(t_wait)                             \
     KRELALL()
-
+ 
 #define RUN_ENTER(command, t_sleep_print)              \
     PRESS_KRELALL(MKEY_LEFT_WIN | MKEY_CH_R, 200, 300) \
     alt_print((command), (t_sleep_print));             \
@@ -183,8 +185,7 @@ static bool release_btn(const uint8_t button) {
     WAIT(200)                                                            \
     PRESS_KRELALL(MKEY_LEFT_CTRL | MKEY_LEFT_SHIFT | MKEY_ENTER, 0, 300) \
     WAIT(500)                                                            \
-    PRESS_KRELALL(MKEY_LEFT_ARROW, 0, 300)                               \
-    PRESS_KRELALL(MKEY_ENTER, 0, 300)                                    \
+    PRESS_KRELALL(MKEY_LEFT_ALT | MKEY_CH_Y, 0, 200)                     \
     WAIT(500)
 
 #endif  // ALT_H
