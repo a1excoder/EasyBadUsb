@@ -184,7 +184,7 @@ static bool release_btn(const uint8_t button) {
     alt_print((command), (t_sleep_print));                               \
     WAIT(200)                                                            \
     PRESS_KRELALL(MKEY_LEFT_CTRL | MKEY_LEFT_SHIFT | MKEY_ENTER, 0, 300) \
-    WAIT(500)                                                            \
+    WAIT(900)                                                            \
     PRESS_KRELALL(MKEY_LEFT_ALT | MKEY_CH_Y, 0, 200)                     \
     WAIT(500)
 
