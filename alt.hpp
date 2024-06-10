@@ -4,10 +4,10 @@
 #include <Keyboard.h>
 #include <stdint.h>
 
-#define BEGIN()           \
+#define BEGIN(delay_n)    \
     void setup() {        \
         Keyboard.begin(); \
-        delay(1000);
+        delay(delay_n);
 
 #define END()       \
     Keyboard.end(); \
@@ -183,7 +183,7 @@ static bool release_btn(const uint8_t button) {
     PRESS_KRELALL(MKEY_LEFT_WIN | MKEY_CH_R, 200, 300)                   \
     alt_print((command), (t_sleep_print));                               \
     WAIT(200)                                                            \
-    PRESS_KRELALL(MKEY_LEFT_CTRL | MKEY_LEFT_SHIFT | MKEY_ENTER, 0, 300) \
+    PRESS_KRELALL(MKEY_LEFT_CTRL | MKEY_LEFT_SHIFT | MKEY_ENTER, 0, 500) \
     WAIT(900)                                                            \
     PRESS_KRELALL(MKEY_LEFT_ALT | MKEY_CH_Y, 0, 200)                     \
     WAIT(500)
