@@ -7,7 +7,7 @@
 #define BEGIN(delay_n)    \
     void setup() {        \
         Keyboard.begin(); \
-        delay(delay_n);
+        delay((delay_n));
 
 #define END()       \
     Keyboard.end(); \
