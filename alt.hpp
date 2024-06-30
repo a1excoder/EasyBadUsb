@@ -107,6 +107,7 @@ static void alt_print(const char *str, size_t t_sleep) {
             KREL(numpad_keys[buff[j]])
         }
     EXT:
+        delay(30);
         KREL(KEY_LEFT_ALT)
     }
 }
@@ -185,7 +186,7 @@ static bool release_btn(const uint8_t button) {
     WAIT(200)                                                            \
     PRESS_KRELALL(MKEY_LEFT_CTRL | MKEY_LEFT_SHIFT | MKEY_ENTER, 0, 500) \
     WAIT(900)                                                            \
-    PRESS_KRELALL(MKEY_LEFT_ALT | MKEY_CH_Y, 0, 200)                     \
+    PRESS_KRELALL(MKEY_LEFT_ALT | MKEY_CH_Y, 400, 200)                   \
     WAIT(500)
 
 #endif  // ALT_H
