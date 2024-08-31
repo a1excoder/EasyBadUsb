@@ -4,9 +4,10 @@
 #include <Keyboard.h>
 #include <stdint.h>
 
-#define BEGIN(delay_n)    \
-    void setup() {        \
-        Keyboard.begin(); \
+#define BEGIN(delay_n)              \
+    void setup() {                  \
+        Keyboard.begin();           \
+        randomSeed(analogRead(0));  \
         delay((delay_n));
 
 #define END()       \
