@@ -69,6 +69,12 @@ static const alt_code alt_codes_array[] = {
 
 #### buttons definitions
 ```cpp
+/*
+    Pressing buttons should be consistent as in the list 
+    (the list is specially made according to the most popular input sequences, 
+    this is done to conveniently fit all the defines in one binary or)
+*/
+
 #define MKEY_LEFT_CTRL      (0x0001 << 0x00)
 #define MKEY_LEFT_WIN       (0x0001 << 0x01)
 #define MKEY_LEFT_SHIFT     (0x0001 << 0x02)
