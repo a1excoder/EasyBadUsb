@@ -6,6 +6,7 @@ simple header only lib written in C++ to make BadUsb scripting easier (Arduino I
 [image from github.com/ElijahCuff/HW-374](https://github.com/ElijahCuff/HW-374)
 
 # v2 with alt codes (only for Windows)
+## To use functions with ALT codes, Num Lock should be turned on!!!
 
 ### first, include alt.hpp in your sketch file
 ```cpp
@@ -68,22 +69,22 @@ static const alt_code alt_codes_array[] = {
 
 #### buttons definitions
 ```cpp
-#define MKEY_LEFT_CTRL (0x0001 << 0x00)
-#define MKEY_LEFT_WIN (0x0001 << 0x01)
-#define MKEY_LEFT_SHIFT (0x0001 << 0x02)
-#define MKEY_LEFT_ALT (0x0001 << 0x03)
-#define MKEY_ENTER (0x0001 << 0x04)
+#define MKEY_LEFT_CTRL      (0x0001 << 0x00)
+#define MKEY_LEFT_WIN       (0x0001 << 0x01)
+#define MKEY_LEFT_SHIFT     (0x0001 << 0x02)
+#define MKEY_LEFT_ALT       (0x0001 << 0x03)
+#define MKEY_ENTER          (0x0001 << 0x04)
 
-#define MKEY_LEFT_ARROW (0x0001 << 0x05)
-#define MKEY_RIGHT_ARROW (0x0001 << 0x06)
+#define MKEY_LEFT_ARROW     (0x0001 << 0x05)
+#define MKEY_RIGHT_ARROW    (0x0001 << 0x06)
 
-#define MKEY_CH_R (0x0001 << 0x07)
-#define MKEY_CH_A (0x0001 << 0x08)
-#define MKEY_CH_C (0x0001 << 0x09)
+#define MKEY_CH_R           (0x0001 << 0x07)
+#define MKEY_CH_A           (0x0001 << 0x08)
+#define MKEY_CH_C           (0x0001 << 0x09)
 
-#define MKEY_FN_4 (0x0001 << 0x0A)
+#define MKEY_FN_4           (0x0001 << 0x0A)
 
-#define MKEY_CH_Y (0x0001 << 0x0B)
+#define MKEY_CH_Y           (0x0001 << 0x0B)
 ```
 
 ### The PRESS functions is used to press special keys and simultaneously press several keys on the keyboard

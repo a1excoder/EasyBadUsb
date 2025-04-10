@@ -23,22 +23,22 @@
 
 #define CHECK_MASK(original, n, mask) ((original) & (1 << (n))) == (mask)
 
-#define MKEY_LEFT_CTRL (0x0001 << 0x00)
-#define MKEY_LEFT_WIN (0x0001 << 0x01)
-#define MKEY_LEFT_SHIFT (0x0001 << 0x02)
-#define MKEY_LEFT_ALT (0x0001 << 0x03)
-#define MKEY_ENTER (0x0001 << 0x04)
+#define MKEY_LEFT_CTRL      (0x0001 << 0x00)
+#define MKEY_LEFT_WIN       (0x0001 << 0x01)
+#define MKEY_LEFT_SHIFT     (0x0001 << 0x02)
+#define MKEY_LEFT_ALT       (0x0001 << 0x03)
+#define MKEY_ENTER          (0x0001 << 0x04)
 
-#define MKEY_LEFT_ARROW (0x0001 << 0x05)
-#define MKEY_RIGHT_ARROW (0x0001 << 0x06)
+#define MKEY_LEFT_ARROW     (0x0001 << 0x05)
+#define MKEY_RIGHT_ARROW    (0x0001 << 0x06)
 
-#define MKEY_CH_R (0x0001 << 0x07)
-#define MKEY_CH_A (0x0001 << 0x08)
-#define MKEY_CH_C (0x0001 << 0x09)
+#define MKEY_CH_R           (0x0001 << 0x07)
+#define MKEY_CH_A           (0x0001 << 0x08)
+#define MKEY_CH_C           (0x0001 << 0x09)
 
-#define MKEY_FN_4 (0x0001 << 0x0A)
+#define MKEY_FN_4           (0x0001 << 0x0A)
 
-#define MKEY_CH_Y (0x0001 << 0x0B)
+#define MKEY_CH_Y           (0x0001 << 0x0B)
 
 typedef struct {
     char symbol;
@@ -160,7 +160,6 @@ static bool release_btn(const uint8_t button) {
     return false;
 }
 
-// (int i = BTN_N-1; i >= 0; i--)
 #define PRESS(BTNS, t_sleep)                     \
     for (int i = 0; i < BTN_N; i++) {            \
         if (CHECK_MASK((BTNS), i, btn_arr[i])) { \
@@ -173,7 +172,7 @@ static bool release_btn(const uint8_t button) {
     PRESS((BTNS), t_sleep)                   \
     WAIT(t_wait)                             \
     KRELALL()
- 
+
 #define RUN_ENTER(command, t_sleep_print)              \
     PRESS_KRELALL(MKEY_LEFT_WIN | MKEY_CH_R, 200, 300) \
     alt_print((command), (t_sleep_print));             \
